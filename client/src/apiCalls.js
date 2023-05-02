@@ -1,5 +1,9 @@
 import { Loader } from "@googlemaps/js-api-loader";
 
+const fetchHeader = new Headers({
+    "Content-Type": "application/json",
+});
+
 const loader = new Loader({
     apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries: ["geocoding"],
@@ -40,41 +44,58 @@ async function getLatLngFromPostalCode(postalCode) {
     }
 }
 
-export async function getResultsForPostalCode(postalCode) {
-    //use geocoder to get lat and lng for inputed postal code
-    const latLng = await getLatLngFromPostalCode(postalCode);
-    const restaurantHeader = new Headers({
-        "Content-Type": "application/json",
-    });
+async function getRestaurants(latLng) {
     const getRestaurantOptions = {
         method: "POST",
-        headers: restaurantHeader,
+        headers: fetchHeader,
         body: JSON.stringify(latLng),
     };
     const restaurantResponse = await fetch(
         "/restaurants",
         getRestaurantOptions
     );
-    let restaurants = await restaurantResponse.json();
+    const restaurants = await restaurantResponse.json();
+    return restaurants;
+}
 
-    for (let restaurant of restaurants.data) {
-        const restaurantId = restaurant.restaurantNumber;
-        const getPricesOptions = {
-            method: "POST",
-            headers: restaurantHeader,
-            body: JSON.stringify({ restaurantId }),
-        };
-        const pricesResponse = await fetch("/prices", getPricesOptions);
-        const prices = await pricesResponse.json();
-        console.log(prices);
-    }
+async function getPrices(restaurantId) {
+    const getPricesOptions = {
+        method: "POST",
+        headers: fetchHeader,
+        body: JSON.stringify({ restaurantId }),
+    };
+    const pricesResponse = await fetch("/prices", getPricesOptions);
+    const prices = await pricesResponse.json();
+    return prices;
+}
+
+async function getRewards() {
     const getRewardsOptions = {
         method: "GET",
-        headers: restaurantHeader,
+        headers: fetchHeader,
     };
     const rewardsResponse = await fetch("/rewards", getRewardsOptions);
     const rewards = await rewardsResponse.json();
-    console.log(rewards);
+    return rewards;
+}
 
-    // console.log(data.data[0].restaurantNumber);
+export async function getResultsForPostalCode(postalCode) {
+    //use geocoder to get lat and lng for inputed postal code
+    const latLng = await getLatLngFromPostalCode(postalCode);
+
+    //fetch the restaurants near the lat and lng coordinates
+    const restaurants = await getRestaurants(latLng);
+
+    //fetch the prices from each of the restaurants
+    const prices = [];
+    for (let restaurant of restaurants.data) {
+        const priceObj = await getPrices(restaurant.restaurantNumber);
+        prices.push(priceObj);
+    }
+
+    //fetch the rewards from chipotle rewards
+    const rewards = await getRewards();
+
+    console.log(prices);
+    console.log(rewards);
 }

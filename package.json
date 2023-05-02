@@ -1,0 +1,10 @@
+{
+    "name": "chipotle_rewards_optimizer",
+    "version": "1.0.0",
+    "description": "Get the most out of your chipotle rewards",
+    "scripts": {
+        "client": "cd client && npm start",
+        "server": "cd server && npm run dev"
+    },
+    "author": "Reece Gao"
+}

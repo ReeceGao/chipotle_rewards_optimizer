@@ -2,7 +2,7 @@ import StartPage from "../StartPage/StartPage";
 import Header from "../Header/Header";
 import "./App.css";
 import { useEffect, useState, useRef } from "react";
-import { getResultsForPostalCode } from "../../apiCalls";
+import { getResultsForPostalCode } from "../../api/apiCalls";
 
 function App() {
     const [zipcode, setZipcode] = useState("");

@@ -10,14 +10,15 @@ const loader = new Loader({
     libraries: ["geocoding"],
 });
 
-let geocoder;
-let rewards;
-
 function loadGeocoder() {
     return new Promise((resolve) => {
         resolve(loader.load());
     });
 }
+
+const cache = {};
+let geocoder;
+let rewards;
 
 async function getLatLngFromPostalCode(postalCode) {
     if (!geocoder) {
@@ -107,6 +108,8 @@ function optimizeRewards(rewards, listOfRestaurantPrices, restaurants) {
                 const category = rewardMapping[title].itemCategory;
                 const itemType = rewardMapping[title].itemType;
                 let filteredItemByType;
+
+                //Edge case as double protein was located in a weird spot
                 if (title === "Double Protein") {
                     filteredItemByType = restaurantPrice[
                         category
@@ -163,16 +166,18 @@ function optimizeRewards(rewards, listOfRestaurantPrices, restaurants) {
         restaurantOptimized.restaurant = restaurants.filter((restaurant) => {
             return restaurant.restaurantNumber === restaurantPrice.restaurantId;
         })[0];
-        restaurantOptimized.orig = restaurantPrice;
+        restaurantOptimized.restaurantPrices = restaurantPrice;
         restaurantOptimized.bestValues = dollarValues;
         optimized.push(restaurantOptimized);
     }
-    console.log(optimized);
 
     return optimized;
 }
 
 export async function getResultsForPostalCode(postalCode) {
+    if (cache[postalCode]) {
+        return cache[postalCode];
+    }
     //use geocoder to get lat and lng for inputed postal code
     const latLng = await getLatLngFromPostalCode(postalCode);
 
@@ -191,9 +196,12 @@ export async function getResultsForPostalCode(postalCode) {
         rewards = await getRewards();
     }
 
-    // console.log(rewards);
-    // console.log(restaurantPrices);
-    // console.log(getRewardMappings());
-
-    optimizeRewards(rewards, restaurantPrices, restaurants.data);
+    //for each restaurant, get the best value rewards based on in-store prices.
+    const optimizedRewards = optimizeRewards(
+        rewards,
+        restaurantPrices,
+        restaurants.data
+    );
+    cache[postalCode] = optimizedRewards;
+    return optimizedRewards;
 }

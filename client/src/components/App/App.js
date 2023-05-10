@@ -11,9 +11,10 @@ function App() {
         setZipcode(e.target.value);
     };
 
-    const onKeyDownHandler = (e) => {
+    const onKeyDownHandler = async (e) => {
         if (e.key === "Enter") {
-            getResultsForPostalCode(zipcode);
+            const res = await getResultsForPostalCode(zipcode);
+            console.log(res);
         }
     };
 

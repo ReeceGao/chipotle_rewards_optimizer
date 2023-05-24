@@ -1,8 +1,8 @@
 import StartPage from "../StartPage/StartPage";
 import Header from "../Header/Header";
-import "./App.css";
 import { useEffect, useState, useRef } from "react";
 import { getResultsForPostalCode } from "../../api/apiCalls";
+import "./App.css";
 
 function App() {
     const [zipcode, setZipcode] = useState("");
@@ -19,16 +19,13 @@ function App() {
     };
 
     return (
-        <div className="App">
-            <div className="Header">
-                <Header />
-            </div>
-            <div className="Body">
+        <div className="app">
+            <main className="main-content">
                 <StartPage
                     onTypeHandler={onTypeHandler}
                     onKeyDownHandler={onKeyDownHandler}
                 />
-            </div>
+            </main>
         </div>
     );
 }

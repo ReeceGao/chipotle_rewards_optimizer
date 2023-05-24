@@ -1,3 +1,10 @@
+import "./Header.css";
 export default function Header() {
-  return <div></div>;
+    return (
+        <nav id="nav-options">
+            <a>Chipotle Rewards Optimizer</a>
+            <a>Rewards</a>
+            <a>About</a>
+        </nav>
+    );
 }

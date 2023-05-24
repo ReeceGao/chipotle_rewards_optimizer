@@ -1,0 +1,62 @@
+.container {
+    height: 100%;
+    width: 100%;
+}
+
+.content {
+    width: inherit;
+    height: 30em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.purpose-text {
+    font-weight: 700;
+    color: var(--clr-white);
+    text-align: center;
+    position: relative;
+    padding: 2em;
+    width: 100%;
+    margin-top: 2em;
+}
+
+.input-section {
+    text-align: center;
+    width: 100%;
+    padding: 2em;
+    position: relative;
+    margin-top: 2em;
+}
+
+.rewards-icon {
+    position: relative;
+    padding: 2em;
+    margin-top: 6em;
+}
+
+.enter-zipcode-text {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--clr-white);
+    padding: 1em;
+}
+
+.input,
+.search {
+    border-radius: 1em;
+    height: 2.5em;
+}
+
+.input {
+    padding: 0.75em;
+}
+
+.search {
+    margin-left: 0.9em;
+    width: 5em;
+    color: var(--clr-white);
+    font-weight: 700;
+    background-color: var(--clr-red);
+}

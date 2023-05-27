@@ -91,3 +91,7 @@ body {
 .chipotle-white {
     background-color: var(--clr-white);
 }
+
+.default-padding {
+    padding: 2em;
+}

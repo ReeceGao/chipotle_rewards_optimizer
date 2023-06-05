@@ -1,5 +1,9 @@
 import "./StartPage.css";
-export default function StartPage({ onTypeHandler, onKeyDownHandler }) {
+export default function StartPage({
+    onTypeHandler,
+    onKeyDownHandler,
+    onEnterButtonClick,
+}) {
     return (
         <div className="container chipotle-brown">
             <div className="content">
@@ -28,7 +32,12 @@ export default function StartPage({ onTypeHandler, onKeyDownHandler }) {
                             onKeyDown={onKeyDownHandler}
                         />
                         <span>
-                            <button className="search">Search</button>
+                            <button
+                                onClick={onEnterButtonClick}
+                                className="search"
+                            >
+                                Search
+                            </button>
                         </span>
                     </div>
                 </div>

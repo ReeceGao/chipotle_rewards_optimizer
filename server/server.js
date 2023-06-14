@@ -7,14 +7,28 @@ app.get("/", (req, res) => {
     res.send("hello world!");
 });
 
-app.post("/restaurants", (req, res) => {
+app.post("/restaurants", async (req, res) => {
     const { spawn } = require("child_process");
-    const resturants = spawn("node", [
+    const restaurants = spawn("node", [
         "./scripts/getRestaurants.js",
         req.body.lat.toString(),
         req.body.lng.toString(),
     ]);
-    resturants.stdout.pipe(res);
+    let data = "";
+    for await (const chunk of restaurants.stdout) {
+        data += chunk;
+    }
+    let error = "";
+    for await (const chunk of restaurants.stderr) {
+        error += chunk;
+    }
+    const exitCode = await new Promise((resolve, reject) => {
+        restaurants.on("close", resolve);
+    });
+    if (exitCode) {
+        throw new Error(`subprocess error exit ${exitCode}, ${error}`);
+    }
+    res.send(JSON.parse(data));
 });
 
 app.post("/prices", (req, res) => {
@@ -44,10 +58,6 @@ app.get("/rewards", async (req, res) => {
         throw new Error(`subprocess error exit ${exitCode}, ${error}`);
     }
     res.send(JSON.parse(data));
-    // rewards.stdout.on("data", (data) => {
-    //     res.send(data.toString());
-    // });
-    // rewards.stdout.pipe(res);
 });
 
 app.listen(port, () => {

@@ -1,6 +1,8 @@
 import { Loader } from "@googlemaps/js-api-loader";
 import getRewardMappings from "./mappings";
 
+const nodeServerUrl = "https://best-chipotle-rewards.onrender.com";
+
 const fetchHeader = new Headers({
     "Content-Type": "application/json",
 });
@@ -54,7 +56,7 @@ async function getRestaurants(latLng) {
         body: JSON.stringify(latLng),
     };
     const restaurantResponse = await fetch(
-        "/restaurants",
+        `${nodeServerUrl}/restaurants`,
         getRestaurantOptions
     );
     const restaurants = await restaurantResponse.json();
@@ -67,13 +69,16 @@ async function getPrices(restaurantId) {
         headers: fetchHeader,
         body: JSON.stringify({ restaurantId }),
     };
-    const pricesResponse = await fetch("/prices", getPricesOptions);
+    const pricesResponse = await fetch(
+        `${nodeServerUrl}/prices`,
+        getPricesOptions
+    );
     const prices = await pricesResponse.json();
     return prices;
 }
 
 async function getRewards() {
-    const rewardsResponse = await fetch("/rewards");
+    const rewardsResponse = await fetch(`${nodeServerUrl}/rewards`);
     const rewards = await rewardsResponse.json();
     return rewards;
 }

@@ -31,13 +31,27 @@ app.post("/restaurants", async (req, res) => {
     res.send(JSON.parse(data));
 });
 
-app.post("/prices", (req, res) => {
+app.post("/prices", async (req, res) => {
     const { spawn } = require("child_process");
     const prices = spawn("node", [
         "./scripts/getPrices.js",
         req.body.restaurantId.toString(),
     ]);
-    prices.stdout.pipe(res);
+    let data = "";
+    for await (const chunk of prices.stdout) {
+        data += chunk;
+    }
+    let error = "";
+    for await (const chunk of prices.stderr) {
+        error += chunk;
+    }
+    const exitCode = await new Promise((resolve, reject) => {
+        prices.on("close", resolve);
+    });
+    if (exitCode) {
+        throw new Error(`subprocess error exit ${exitCode}, ${error}`);
+    }
+    res.send(JSON.parse(data));
 });
 
 app.get("/rewards", async (req, res) => {
@@ -61,5 +75,5 @@ app.get("/rewards", async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log("Server is up on 3113");
+    console.log("Server is up and running!");
 });

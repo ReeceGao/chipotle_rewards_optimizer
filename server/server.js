@@ -1,6 +1,12 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 app.use(express.json()); //Needed this line otherwise there would be no req.body
+app.use(
+    cors({
+        origin: "*",
+    })
+);
 const port = 3113;
 
 app.get("/", (req, res) => {

@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import { Loader } from "@googlemaps/js-api-loader";
 import "./App.css";
 
-// import { getResultsForPostalCode } from "../../api/apiCalls";
+import { getResultsForPostalCode, loadGoogleApi } from "../../api/apiCalls";
 
 function App() {
     const [zipcode, setZipcode] = useState("");
@@ -11,27 +11,22 @@ function App() {
     const onTypeHandler = (e) => {
         setZipcode(e.target.value);
     };
-    // const onKeyDownHandler = async (e) => {
-    //     if (e.key === "Enter") {
-    //         const res = await getResultsForPostalCode(zipcode);
-    //         console.log(res);
-    //     }
-    // };
-    // const onEnterButtonClick = async () => {
-    //     const res = await getResultsForPostalCode(zipcode);
-    //     console.log(res);
-    // };
-    const loader = new Loader({
-        apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-        libraries: ["maps"],
-    });
+    const onKeyDownHandler = async (e) => {
+        if (e.key === "Enter") {
+            const res = await getResultsForPostalCode(zipcode);
+            console.log(res);
+        }
+    };
+    const onButtonClickHandler = async () => {
+        const res = await getResultsForPostalCode(zipcode);
+        console.log(res);
+    };
 
-    let map;
+    let mapLoaded = false;
 
     useEffect(() => {
-        loader
-            .load()
-            .then((google) => {
+        if (!mapLoaded) {
+            loadGoogleApi().then((google) => {
                 const mapOptions = {
                     disableDefaultUI: true,
                     center: {
@@ -50,19 +45,17 @@ function App() {
                         strictBounds: true,
                     },
                 };
-
-                map = new google.maps.Map(
+                let map = new google.maps.Map(
                     document.querySelector(".map"),
                     mapOptions
                 );
-            })
-            .catch((e) => {
-                console.log(e);
+                mapLoaded = true;
             });
-    });
+        }
+    }, []);
 
     return (
-        <div className="app-container">
+        <div className="app-container" onKeyDown={onKeyDownHandler}>
             <header className="primary-header">
                 <Header />
             </header>
@@ -77,8 +70,12 @@ function App() {
                             maxLength={5}
                             type="text"
                             pattern="[0-9]*"
+                            onChange={onTypeHandler}
                         />
-                        <a className="search-icon">
+                        <a
+                            className="search-icon"
+                            onClick={onButtonClickHandler}
+                        >
                             <img src="./images/search.svg" alt="" />
                         </a>
                     </div>

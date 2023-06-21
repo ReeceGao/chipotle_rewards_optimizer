@@ -12,10 +12,14 @@ const loader = new Loader({
     libraries: ["geocoding", "maps"],
 });
 
-function loadGoogleApi() {
-    return new Promise((resolve) => {
-        resolve(loader.load());
-    });
+let google;
+
+export async function loadGoogleApi() {
+    if (google) {
+        return google;
+    }
+    google = await loader.load();
+    return google;
 }
 
 const cache = {};
@@ -24,7 +28,7 @@ let rewards;
 
 async function getLatLngFromPostalCode(postalCode) {
     if (!geocoder) {
-        let google = await loadGoogleApi();
+        loadGoogleApi();
         geocoder = new google.maps.Geocoder();
     }
     let resultsFromPostal;

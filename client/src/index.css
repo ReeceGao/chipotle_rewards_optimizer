@@ -1,12 +1,18 @@
 :root {
-    --clr-brown: hsl(17, 100%, 14%);
-    --clr-red: hsl(4, 76%, 38%);
-    --clr-white: hsl(0, 0%, 100%);
+    --clr-primary-400: hsl(17 100% 14%);
+    --clr-neutral-400: hsl(0 0% 54%);
+    --clr-neutral-300: hsl(0 0% 54% / 0.75);
+    --clr-white: hsl(0 0% 100%);
 
-    --ff-primary: "Open Sans", sans-serif;
+    --ff-primary: "Nunito", sans-serif;
 
-    --ff-body: var(--ff-primary);
-    --ff-heading: var(--ff-heading);
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semi-bold: 600;
+    --fw-bold: 700;
+
+    --fs-300: 0.875rem;
+    --fs-400: 1rem;
 }
 
 /* Box sizing rules */
@@ -20,6 +26,7 @@
 * {
     margin: 0;
     padding: 0;
+    font: inherit;
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
@@ -31,6 +38,11 @@ ol[role="list"] {
 /* Set core root defaults */
 html:focus-within {
     scroll-behavior: smooth;
+}
+
+html,
+body {
+    height: 100%;
 }
 
 /* Set core body defaults */
@@ -47,7 +59,8 @@ a:not([class]) {
 
 /* Make images easier to work with */
 img,
-picture {
+picture,
+svg {
     max-width: 100%;
     display: block;
 }
@@ -77,21 +90,38 @@ select {
 }
 
 body {
-    font-family: "Open Sans", sans-serif;
+    font-family: var(--ff-primary);
+    color: var(--clr-primary-400);
+    font-size: var(--fs-400);
+    font-weight: var(--fw-medium);
 }
 
-.chipotle-red {
-    background-color: var(--clr-red);
+.color-primary-400 {
+    color: var(--clr-primary-400);
+}
+.color-neutral-400 {
+    color: var(--clr-neutral-400);
+}
+.color-neutral-300 {
+    color: var(--clr-neutral-300);
 }
 
-.chipotle-brown {
-    background-color: var(--clr-brown);
+.fw-400 {
+    font-weight: var(--fw-regular);
+}
+.fw-500 {
+    font-weight: var(--fw-medium);
+}
+.fw-600 {
+    font-weight: var(--fw-semi-bold);
+}
+.fw-700 {
+    font-weight: var(--fw-bold);
 }
 
-.chipotle-white {
-    background-color: var(--clr-white);
+.fs-300 {
+    font-size: var(--fs-300);
 }
-
-.default-padding {
-    padding: 2em;
+.fs-400 {
+    font-size: var(--fs-400);
 }

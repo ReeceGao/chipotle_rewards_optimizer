@@ -9,10 +9,10 @@ const fetchHeader = new Headers({
 
 const loader = new Loader({
     apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    libraries: ["geocoding"],
+    libraries: ["geocoding", "maps"],
 });
 
-function loadGeocoder() {
+function loadGoogleApi() {
     return new Promise((resolve) => {
         resolve(loader.load());
     });
@@ -24,7 +24,7 @@ let rewards;
 
 async function getLatLngFromPostalCode(postalCode) {
     if (!geocoder) {
-        let google = await loadGeocoder();
+        let google = await loadGoogleApi();
         geocoder = new google.maps.Geocoder();
     }
     let resultsFromPostal;

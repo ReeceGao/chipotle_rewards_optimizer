@@ -1,4 +1,13 @@
-#nav-options {
-    height: 100%;
-    width: 100%;
+.header-wrapper,
+.nav-list {
+    display: flex;
+}
+.header-wrapper {
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 1rem;
+}
+.nav-list {
+    padding-right: 1.5rem;
+    gap: 3rem;
 }

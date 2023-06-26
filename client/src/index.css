@@ -13,6 +13,7 @@
 
     --fs-300: 0.875rem;
     --fs-400: 1rem;
+    --fs-500: 1.25rem;
 }
 
 /* Box sizing rules */
@@ -124,4 +125,7 @@ body {
 }
 .fs-400 {
     font-size: var(--fs-400);
+}
+.fs-500 {
+    font-size: var(--fs-500);
 }

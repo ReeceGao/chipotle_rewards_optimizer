@@ -6,7 +6,7 @@ export default function Header() {
                 <img src="./images/logo.png" alt="site logo" />
             </a>
             <nav className="primary-navigation">
-                <ul role="list" className="nav-list">
+                <ul role="list" className="nav-list color-neutral-400">
                     <li>
                         <a>Home</a>
                     </li>

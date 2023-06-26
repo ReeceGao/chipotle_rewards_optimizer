@@ -1,7 +1,8 @@
 import { Loader } from "@googlemaps/js-api-loader";
 import getRewardMappings from "./mappings";
 
-const nodeServerUrl = "https://best-chipotle-rewards.onrender.com";
+// const nodeServerUrl = "https://best-chipotle-rewards.onrender.com";
+const nodeServerUrl = "";
 
 const fetchHeader = new Headers({
     "Content-Type": "application/json",
@@ -46,6 +47,7 @@ async function getLatLngFromPostalCode(postalCode) {
         return {
             lat,
             lng,
+            resultsFromPostal,
         };
     } catch (e) {
         console.error("An error occured while fetching from geocoder");
@@ -88,7 +90,7 @@ async function getRewards() {
 }
 
 function optimizeRewards(rewards, listOfRestaurantPrices, restaurants) {
-    const optimized = [];
+    const optimized = { results: [] };
     const rewardMapping = getRewardMappings();
 
     for (const restaurantPrice of listOfRestaurantPrices) {
@@ -108,7 +110,7 @@ function optimizeRewards(rewards, listOfRestaurantPrices, restaurants) {
                 const price = filteredItemByName[0].unitPrice;
                 const value = parseFloat((price / points).toFixed(5));
                 dollarValues.push({
-                    title,
+                    reward: title,
                     points,
                     price,
                     value,
@@ -132,37 +134,21 @@ function optimizeRewards(rewards, listOfRestaurantPrices, restaurants) {
                         }
                     );
                 }
-                const valuesFromGroup = [];
-                let maxPrice = 0;
-                let maxItem;
                 for (let item of filteredItemByType) {
-                    if (item.unitPrice > maxPrice) {
-                        maxPrice = item.unitPrice;
-                        maxItem = item.itemName;
-                    }
-                    valuesFromGroup.push({
-                        itemName: item.itemName,
+                    dollarValues.push({
+                        points,
+                        reward: title,
+                        menuItem: item.itemName,
                         price: item.unitPrice,
                         value: parseFloat((item.unitPrice / points).toFixed(5)),
                     });
                 }
-                valuesFromGroup.sort((item1, item2) => {
-                    return item2.value - item1.value;
-                });
-                dollarValues.push({
-                    title,
-                    points,
-                    maxPrice,
-                    maxItem,
-                    value: parseFloat((maxPrice / points).toFixed(5)),
-                    valuesFromGroup,
-                });
             } else if (title.includes("Chipotle Goods")) {
                 const regex = /\$(\d+(\.\d+)?)/g;
                 const price = parseInt(title.match(regex)[0].slice(1));
                 const value = parseFloat((price / points).toFixed(5));
                 dollarValues.push({
-                    title,
+                    reward: title,
                     points,
                     price,
                     value,
@@ -177,7 +163,7 @@ function optimizeRewards(rewards, listOfRestaurantPrices, restaurants) {
         })[0];
         restaurantOptimized.restaurantPrices = restaurantPrice;
         restaurantOptimized.bestValues = dollarValues;
-        optimized.push(restaurantOptimized);
+        optimized["results"].push(restaurantOptimized);
     }
 
     return optimized;
@@ -188,10 +174,10 @@ export async function getResultsForPostalCode(postalCode) {
         return cache[postalCode];
     }
     //use geocoder to get lat and lng for inputed postal code
-    const latLng = await getLatLngFromPostalCode(postalCode);
+    const latLngObj = await getLatLngFromPostalCode(postalCode);
 
     //fetch the restaurants near the lat and lng coordinates
-    const restaurants = await getRestaurants(latLng);
+    const restaurants = await getRestaurants(latLngObj);
 
     //fetch the prices from each of the restaurants
     const restaurantPrices = [];
@@ -211,6 +197,7 @@ export async function getResultsForPostalCode(postalCode) {
         restaurantPrices,
         restaurants.data
     );
+    optimizedRewards["latLngObj"] = latLngObj;
     cache[postalCode] = optimizedRewards;
     return optimizedRewards;
 }

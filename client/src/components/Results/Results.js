@@ -25,8 +25,12 @@ export default function Results({ closeResults, markerMap, selectedMarker }) {
     return (
         <div className="results">
             <div className="results-header">
-                <div></div>
                 <span className="fs-500 fw-700">Results</span>
+                <div className="legend fs-300 color-neutral-400">
+                    <span>value: cost / points</span>
+                    <span>cost: price of the menu item</span>
+                    <span>points: required chipotle reward points</span>
+                </div>
                 <img src="./images/close.svg" alt="" onClick={closeResults} />
             </div>
             <ul>
@@ -56,69 +60,19 @@ export default function Results({ closeResults, markerMap, selectedMarker }) {
                                 </div>
                                 <div className="reward-stats fs-300">
                                     <span className="color-neutral-400">
-                                        Value: ${entry.value}
+                                        value: ${entry.value}
                                     </span>
                                     <span className="color-neutral-400">
-                                        Points: {entry.points}
+                                        cost: ${entry.price}
                                     </span>
                                     <span className="color-neutral-400">
-                                        Cost: ${entry.price}
+                                        points: {entry.points}
                                     </span>
                                 </div>
                             </li>
                         );
                     })}
             </ul>
-            {/* <table>
-                <thead>
-                    <tr>
-                        <th className="fw-600">Reward</th>
-                        <th className="fw-600">
-                            Value <span className="fs-300">(per point)</span>
-                        </th>
-                        <th className="fw-600">Points</th>
-                        <th className="fw-600">Cost</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {markerMap
-                        .get(selectedMarker)
-                        .bestValues.map((entry, index) => {
-                            const imgStr = entry.reward.split(" ").join("");
-                            const displayString =
-                                entry.reward +
-                                (entry.menuItem ? ` (${entry.menuItem})` : "");
-                            let displayRanking = 0;
-                            if (entry.value === prevVal) {
-                                displayRanking = runningRank;
-                            } else {
-                                displayRanking = ++runningRank;
-                                prevVal = entry.value;
-                            }
-                            return (
-                                <tr key={index}>
-                                    <td className="color-neutral-400">
-                                        <span>{displayRanking}.</span>
-                                        <img
-                                            src={rewardToPictureMapping[imgStr]}
-                                            alt=""
-                                        />
-                                        {displayString}
-                                    </td>
-                                    <td className="color-neutral-400">
-                                        ${entry.value}
-                                    </td>
-                                    <td className="color-neutral-400">
-                                        {entry.points}
-                                    </td>
-                                    <td className="color-neutral-400">
-                                        ${entry.price}
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                </tbody>
-            </table> */}
         </div>
     );
 }

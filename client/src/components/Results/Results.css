@@ -65,48 +65,11 @@ li:not(:first-child) {
     padding-bottom: 1rem;
 }
 
-.results-header div {
-    position: absolute;
-}
-
 .results-header img {
     cursor: pointer;
 }
 
-table {
-    width: 100%;
-    padding-inline: 0.75rem;
-    padding-block: 1rem 0.25rem;
-}
-
-thead {
-    position: sticky;
-    top: 0;
-    background-color: var(--clr-white);
-}
-
-tr td:nth-child(1) {
+div.legend {
     display: flex;
-}
-
-tbody td {
-    text-align: center;
-}
-
-thead th:first-child {
-    text-align: left;
-    padding-left: 7.7rem;
-}
-
-thead th {
-    padding-block: 0.5rem;
-}
-tbody td:not(:first-child):not(:last-child),
-thead th:not(:first-child):not(:last-child) {
-    padding-right: 2.5rem;
-}
-
-tbody td:last-child,
-thead th:last-child {
-    padding-right: 0.75rem;
+    flex-direction: column;
 }

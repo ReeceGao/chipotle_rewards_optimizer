@@ -9,6 +9,7 @@ import { getResultsForPostalCode, loadGoogleApi } from "../../api/apiCalls";
 function App() {
     const google = useRef(null);
     const [zipcode, setZipcode] = useState("");
+    const [loading, setLoading] = useState(false);
     const [map, setMap] = useState(null);
     const [selectedMarker, _setSelectedMarker] = useState(null);
     const windowSize = useRef([window.innerWidth, window.innerHeight]);
@@ -48,14 +49,16 @@ function App() {
     };
 
     const searchHandler = async () => {
+        setLoading(true);
         let res;
         try {
             res = await getResultsForPostalCode(zipcode);
         } catch (e) {
             window.alert(e.message);
+            setLoading(false);
             return;
         }
-        console.log(res);
+        setLoading(false);
         map.fitBounds(
             res.latLngObj.resultsFromPostal.results[0].geometry.viewport
         );
@@ -150,6 +153,25 @@ function App() {
                             markerMap={markerMap}
                             selectedMarker={selectedMarker}
                         />
+                    ) : null}
+                    {loading ? (
+                        <div className="loading">
+                            <div class="lds-roller">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <span>Loading...</span>
+                            <span className="apology-text color-neutral-400">
+                                Sorry this might take a long time since I am
+                                hosting my server on a free tier service.
+                            </span>
+                        </div>
                     ) : null}
                 </div>
             </main>

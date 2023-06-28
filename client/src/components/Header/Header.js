@@ -5,7 +5,7 @@ export default function Header() {
             <a className="site-logo">
                 <img src="./images/logo.png" alt="site logo" />
             </a>
-            <nav className="primary-navigation">
+            {/* <nav className="primary-navigation">
                 <ul role="list" className="nav-list color-neutral-400">
                     <li>
                         <a>Home</a>
@@ -17,7 +17,7 @@ export default function Header() {
                         <a>Rewards</a>
                     </li>
                 </ul>
-            </nav>
+            </nav> */}
         </div>
     );
 }

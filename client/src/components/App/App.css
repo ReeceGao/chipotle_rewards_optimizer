@@ -4,113 +4,30 @@
     position: relative;
     width: 100dvw;
     height: 66px;
+    display: flex;
+    justify-content: center;
 }
 
 .container {
     height: calc(100dvh - 66px);
     width: 100dvw;
-    min-width: 70rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (width >= 60em) {
+    .container {
+        height: calc(100dvh - 66px);
+        width: 100dvw;
+        display: block;
+    }
+    .primary-header {
+        display: block;
+    }
 }
 
 .map {
     width: 100dvw;
     height: 100%;
-}
-
-.search {
-    position: absolute;
-    top: 7rem;
-    padding-left: 3.5rem;
-}
-
-.search-input {
-    border-radius: 25rem;
-    outline: none;
-    border: none;
-    height: 3rem;
-    width: 18rem;
-    text-align: left;
-    padding-left: 2rem;
-    color: var(--clr-primary-400);
-    font-weight: var(--fw-regular);
-}
-
-.search-input::placeholder {
-    opacity: 50%;
-}
-
-.search-icon {
-    position: absolute;
-    cursor: pointer;
-    top: 0.7rem;
-    right: 1rem;
-    width: 1.5rem;
-    height: 1.5rem;
-}
-
-.results {
-    position: absolute;
-    border-radius: 1rem;
-    background-color: var(--clr-white);
-    width: 50rem;
-    height: 75%;
-    top: 10%;
-    right: 8rem;
-    margin-top: 2rem;
-    overflow: auto;
-}
-
-.results img {
-    height: 25px;
-    width: 25px;
-}
-
-.results-header {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 1rem;
-    padding-inline: 1rem;
-    margin-bottom: 0.75rem;
-}
-
-.results-header img {
-    cursor: pointer;
-}
-
-table {
-    width: 100%;
-    padding-inline: 0.75rem;
-    padding-block: 1rem 0.25rem;
-}
-
-thead {
-    position: sticky;
-    top: 0;
-    background-color: var(--clr-white);
-}
-
-tr td:nth-child(1) {
-    display: flex;
-}
-
-tbody td {
-    text-align: center;
-}
-
-thead th:first-child {
-    text-align: left;
-    padding-left: 7.7rem;
-}
-
-thead th {
-    padding-block: 0.5rem;
-}
-tbody td:not(:first-child):not(:last-child),
-thead th:not(:first-child):not(:last-child) {
-    padding-right: 2.5rem;
-}
-
-tbody td:last-child,
-thead th:last-child {
-    padding-right: 0.75rem;
 }

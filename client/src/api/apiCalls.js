@@ -50,8 +50,11 @@ async function getLatLngFromPostalCode(postalCode) {
             resultsFromPostal,
         };
     } catch (e) {
-        console.error("An error occured while fetching from geocoder");
+        console.error(
+            "An error occured while fetching from geocoder, likely an invalid zipcode"
+        );
         console.log(e);
+        return -1;
     }
 }
 
@@ -175,6 +178,9 @@ export async function getResultsForPostalCode(postalCode) {
     }
     //use geocoder to get lat and lng for inputed postal code
     const latLngObj = await getLatLngFromPostalCode(postalCode);
+    if (latLngObj === -1) {
+        throw new Error("Error occured, likely an invalid zipcode");
+    }
 
     //fetch the restaurants near the lat and lng coordinates
     const restaurants = await getRestaurants(latLngObj);

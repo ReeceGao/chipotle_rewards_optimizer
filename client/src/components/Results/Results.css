@@ -1,0 +1,112 @@
+.results {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--clr-white);
+    height: 100%;
+    overflow: auto;
+    width: 100%;
+    transition: all 0.75s ease;
+}
+
+.reward-identity {
+    display: flex;
+    flex-direction: row;
+}
+
+.reward-stats {
+    display: flex;
+    gap: 1rem;
+}
+
+ul {
+    padding-left: 1rem;
+    list-style: none;
+    padding-block: 0.5rem;
+}
+
+li:not(:first-child) {
+    margin-top: 1rem;
+}
+
+@media (width >= 60em) {
+    .results {
+        position: absolute;
+        top: 10%;
+        border-radius: 1rem;
+        height: 75%;
+        overflow: auto;
+        width: 30rem;
+        margin-top: 2rem;
+    }
+}
+
+@media (width > 100em) {
+    .results {
+        right: 8rem;
+    }
+}
+
+.results img {
+    height: 25px;
+    width: 25px;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-inline: 1rem;
+    margin-bottom: 0.75rem;
+
+    position: sticky;
+    top: 0;
+    background-color: white;
+    padding-bottom: 1rem;
+}
+
+.results-header div {
+    position: absolute;
+}
+
+.results-header img {
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    padding-inline: 0.75rem;
+    padding-block: 1rem 0.25rem;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    background-color: var(--clr-white);
+}
+
+tr td:nth-child(1) {
+    display: flex;
+}
+
+tbody td {
+    text-align: center;
+}
+
+thead th:first-child {
+    text-align: left;
+    padding-left: 7.7rem;
+}
+
+thead th {
+    padding-block: 0.5rem;
+}
+tbody td:not(:first-child):not(:last-child),
+thead th:not(:first-child):not(:last-child) {
+    padding-right: 2.5rem;
+}
+
+tbody td:last-child,
+thead th:last-child {
+    padding-right: 0.75rem;
+}

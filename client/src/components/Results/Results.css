@@ -32,12 +32,10 @@ li:not(:first-child) {
 @media (width >= 60em) {
     .results {
         position: absolute;
-        top: 10%;
-        border-radius: 1rem;
-        height: 75%;
+        border-radius: 0.2rem;
+        height: 100%;
         overflow: auto;
         width: 30rem;
-        margin-top: 2rem;
     }
 }
 

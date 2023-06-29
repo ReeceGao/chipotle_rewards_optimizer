@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import Header from "../Header/Header";
 import Search from "../Search/Search";
 import Results from "../Results/Results";
+import Loading from "../Loading/Loading";
 import "./App.css";
 
 import { getResultsForPostalCode, loadGoogleApi } from "../../api/apiCalls";
@@ -59,9 +60,12 @@ function App() {
             return;
         }
         setLoading(false);
-        map.fitBounds(
-            res.latLngObj.resultsFromPostal.results[0].geometry.viewport
-        );
+        const geometry = res.latLngObj.resultsFromPostal.results[0].geometry;
+        if (geometry.bounds) {
+            map.fitBounds(geometry.bounds);
+        } else {
+            map.fitBounds(geometry.viewport);
+        }
 
         for (let i = 0; i < res.results.length; i++) {
             const marker = new google.current.maps.Marker({
@@ -89,13 +93,14 @@ function App() {
                     windowSize.current[0] <= 1300 &&
                     windowSize.current[0] > 960
                 ) {
-                    map.panBy(div.offsetWidth / 3, 0);
+                    map.panBy(div.offsetWidth / 5, 0);
                 }
 
                 const beegIcon = {
                     url: "./images/pepper-marker.png",
                     scaledSize: new google.current.maps.Size(90, 90),
                 };
+                marker.setIcon(null);
                 marker.setIcon(beegIcon);
                 setSelectedMarker(marker);
             });
@@ -154,25 +159,7 @@ function App() {
                             selectedMarker={selectedMarker}
                         />
                     ) : null}
-                    {loading ? (
-                        <div className="loading">
-                            <div className="lds-roller">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                            <span>Loading...</span>
-                            <span className="apology-text color-neutral-400">
-                                Sorry this might take a long time since I am
-                                hosting my server on a free tier service.
-                            </span>
-                        </div>
-                    ) : null}
+                    {loading ? <Loading /> : null}
                 </div>
             </main>
         </div>

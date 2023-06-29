@@ -27,6 +27,8 @@
 
 .search-icon {
     position: absolute;
+    background-color: transparent;
+    border: none;
     cursor: pointer;
     top: 0.7rem;
     right: 1rem;

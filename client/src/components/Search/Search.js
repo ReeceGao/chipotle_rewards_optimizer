@@ -15,9 +15,9 @@ export default function Search({
                 pattern="[0-9]*"
                 onChange={onTypeHandler}
             />
-            <a className="search-icon" onClick={onButtonClickHandler}>
+            <button className="search-icon" onClick={onButtonClickHandler}>
                 <img src="./images/search.svg" alt="" />
-            </a>
+            </button>
         </div>
     );
 }

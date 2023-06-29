@@ -11,3 +11,8 @@
     padding-right: 1.5rem;
     gap: 3rem;
 }
+
+.site-logo {
+    background-color: transparent;
+    border: none;
+}

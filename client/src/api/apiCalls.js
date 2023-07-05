@@ -65,7 +65,7 @@ async function getRestaurants(latLng) {
         body: JSON.stringify(latLng),
     };
     const restaurantResponse = await fetch(
-        `${nodeServerUrl}/restaurants`,
+        `${nodeServerUrl}/api/restaurants`,
         getRestaurantOptions
     );
     const restaurants = await restaurantResponse.json();
@@ -79,7 +79,7 @@ async function getPrices(restaurantId) {
         body: JSON.stringify({ restaurantId }),
     };
     const pricesResponse = await fetch(
-        `${nodeServerUrl}/prices`,
+        `${nodeServerUrl}/api/prices`,
         getPricesOptions
     );
     const prices = await pricesResponse.json();
@@ -87,7 +87,7 @@ async function getPrices(restaurantId) {
 }
 
 async function getRewards() {
-    const rewardsResponse = await fetch(`${nodeServerUrl}/rewards`);
+    const rewardsResponse = await fetch(`${nodeServerUrl}/api/rewards`);
     const rewards = await rewardsResponse.json();
     return rewards;
 }

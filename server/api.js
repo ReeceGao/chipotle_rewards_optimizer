@@ -1,15 +1,15 @@
 import express, { Router } from "express";
-import cors from "cors";
+// import cors from "cors";
 import serverless from "serverless-http";
 
 const app = express();
 const router = Router();
 app.use(express.json()); //Needed this line otherwise there would be no req.body
-app.use(
-    cors({
-        origin: "*",
-    })
-);
+// app.use(
+//     cors({
+//         origin: "*",
+//     })
+// );
 const port = 3113;
 
 router.get("/", (req, res) => {

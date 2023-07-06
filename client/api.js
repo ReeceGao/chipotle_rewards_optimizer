@@ -86,7 +86,7 @@ router.get("/rewards", async (req, res) => {
 // app.listen(port, () => {
 //     console.log("Server is up and running!");
 // });
-
-app.use("/api/", router);
+app.use("/.netlify/functions/api", router);
+// app.use("/api/", router);
 
 export const handler = serverless(app);

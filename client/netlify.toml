@@ -6,8 +6,6 @@
   from = "/api/*"
   status = 200
   to = "/.netlify/functions/api/:splat"
-[[plugins]]
-  package = @netlify/plugin-functions-install-core
 [[headers]]
   for = "*"
   [headers.values]

@@ -10,7 +10,7 @@ app.use(
         origin: "*",
     })
 );
-// const port = 3113;
+const port = 3113;
 
 router.get("/", (req, res) => {
     res.send("hello world!");
@@ -83,9 +83,9 @@ router.get("/rewards", async (req, res) => {
     res.send(JSON.parse(data));
 });
 
-// app.listen(port, () => {
-//     console.log("Server is up and running!");
-// });
+app.listen(port, () => {
+    console.log("Server is up and running!");
+});
 
 app.use("/api/", router);
 

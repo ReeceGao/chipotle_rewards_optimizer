@@ -1,4 +1,4 @@
 [functions]
-  external_node_modules = ["express", "cors", "serverless-http"]
+  external_node_modules = ["express", "cors", "serverless-http", "node-fetch"]
   node_bundler = "esbuild"
   included_files = ["/scripts/**"]

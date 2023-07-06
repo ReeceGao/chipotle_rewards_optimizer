@@ -1,7 +1,7 @@
 import express, { Router } from "express";
 import cors from "cors";
 import serverless from "serverless-http";
-import fetch from "node-fetch";
+// import fetch from "node-fetch";
 
 const app = express();
 const router = Router();

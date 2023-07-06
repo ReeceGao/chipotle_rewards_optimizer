@@ -81,8 +81,8 @@ router.get("/rewards", async (req, res) => {
         method: "GET",
         headers: rewardsHeader,
     };
-    const res = await fetch(rewardsURL, rewardsOptions);
-    const data = res.json();
+    const test = await fetch(rewardsURL, rewardsOptions);
+    const data = test.json();
     // let data = "";
     // for await (const chunk of rewards.stdout) {
     //     data += chunk;

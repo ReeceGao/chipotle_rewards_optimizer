@@ -1,7 +1,7 @@
 import { Loader } from "@googlemaps/js-api-loader";
 import getRewardMappings from "./mappings";
 
-const BASE_API_URL = "/.netlify/functions/api";
+const BASE_API_URL = "/.netlify/functions/";
 // const BASE_API_URL = "";
 
 const fetchHeader = new Headers({

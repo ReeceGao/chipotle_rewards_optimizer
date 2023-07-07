@@ -6,7 +6,8 @@ exports.handler = async function (event, context) {
         "Content-Type": "application/json",
         "Ocp-Apim-Subscription-Key": "b4d9f36380184a3788857063bce25d6a",
     });
-
+    console.log(event.body);
+    console.log(typeof event.body);
     const payload = {
         latitude: parseFloat(event.body.latLng.lat),
         longitude: parseFloat(event.body.latLng.lng),

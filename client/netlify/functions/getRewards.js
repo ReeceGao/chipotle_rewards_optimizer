@@ -13,9 +13,9 @@ exports.handler = async function (event, context) {
         headers: rewardsHeader,
     };
     const test = await fetch(rewardsURL, rewardsOptions);
-    console.log(test);
+    const test1 = await test.json();
     return {
         statusCode: 200,
-        body: JSON.stringify({ message: "Hello World" }),
+        body: JSON.stringify(test1),
     };
 };

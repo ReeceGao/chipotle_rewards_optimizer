@@ -10,7 +10,7 @@
 
 .container {
     position: relative;
-    height: calc(100dvh - 66px);
+    height: calc(100svh - 66px);
     width: 100dvw;
     display: flex;
     flex-direction: column;

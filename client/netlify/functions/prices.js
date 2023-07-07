@@ -1,5 +1,5 @@
 exports.handler = async function (event, context) {
-    const restaurantId = event.body.restaurantId;
+    const restaurantId = JSON.parse(event.body).restaurantId;
     const pricesUrl = `https://services.chipotle.com/menuinnovation/v1/restaurants/${restaurantId}/onlinemenu?channelId=web&includeUnavailableItems=true`;
 
     const getPricesHeader = new Headers({

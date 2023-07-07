@@ -6,11 +6,11 @@ exports.handler = async function (event, context) {
         "Content-Type": "application/json",
         "Ocp-Apim-Subscription-Key": "b4d9f36380184a3788857063bce25d6a",
     });
-    console.log(event.body);
-    console.log(typeof event.body);
+
+    const latLngObj = JSON.parse(event.body);
     const payload = {
-        latitude: parseFloat(event.body.latLng.lat),
-        longitude: parseFloat(event.body.latLng.lng),
+        latitude: parseFloat(latLngObj.lat),
+        longitude: parseFloat(latLngObj.lng),
         radius: 80467,
         restaurantStatuses: ["OPEN", "LAB"],
         conceptIds: ["CMG"],

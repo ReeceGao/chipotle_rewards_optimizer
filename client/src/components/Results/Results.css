@@ -39,12 +39,6 @@ li:not(:first-child) {
     }
 }
 
-@media (width > 100em) {
-    .results {
-        right: 8rem;
-    }
-}
-
 .results img {
     height: 25px;
     width: 25px;

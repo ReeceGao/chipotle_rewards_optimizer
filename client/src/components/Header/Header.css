@@ -16,3 +16,14 @@
     background-color: transparent;
     border: none;
 }
+
+.purpose-text {
+    display: none;
+}
+
+@media (width >= 60em) {
+    .purpose-text {
+        margin-right: 1rem;
+        display: block;
+    }
+}

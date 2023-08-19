@@ -1,6 +1,6 @@
 exports.handler = async function (event, context) {
     const rewardsURL =
-        "https://services.chipotle.com/rewardstore/v1/rewardstore/web";
+        "https://services.chipotle.com/rewardstore/v2/rewardstore/web";
 
     const rewardsHeader = new Headers({
         "Content-Type": "application/json",

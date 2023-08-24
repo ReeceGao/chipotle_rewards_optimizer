@@ -25,7 +25,7 @@ export default function Results({ closeResults, markerMap, selectedMarker }) {
     return (
         <div className="results">
             <div className="results-header">
-                <span className="fs-500 fw-700">Results</span>
+                <span className="fs-500 fw-700">Rankings</span>
                 <div className="legend fs-300 color-neutral-400">
                     <span>value: cost / points</span>
                     <span>cost: price of the menu item</span>

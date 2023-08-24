@@ -146,7 +146,7 @@ function optimizeRewards(rewards, listOfRestaurantPrices, restaurants) {
                         value: parseFloat((item.unitPrice / points).toFixed(5)),
                     });
                 }
-            } else if (title.includes("Chipotle Goods")) {
+            } else if (title.toLowerCase().includes("chipotle goods")) {
                 const regex = /\$(\d+(\.\d+)?)/g;
                 const price = parseInt(title.match(regex)[0].slice(1));
                 const value = parseFloat((price / points).toFixed(5));

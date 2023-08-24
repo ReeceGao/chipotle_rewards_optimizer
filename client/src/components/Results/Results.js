@@ -14,9 +14,9 @@ const rewardToPictureMapping = {
     "Kid’sMeal": "./images/kids_meal.png",
     "Chips&Salsa": "./images/chips_n_salsa.png",
     BottledDrink: "./images/bottled_drink.png",
-    $10toChipotleGoods: "./images/10_chipotle_goods.png",
-    $20toChipotleGoods: "./images/20_chipotle_goods.png",
-    $35toChipotleGoods: "./images/35_chipotle_goods.png",
+    $10TOCHIPOTLEGOODS: "./images/10_chipotle_goods.png",
+    $20TOCHIPOTLEGOODS: "./images/20_chipotle_goods.png",
+    $35TOCHIPOTLEGOODS: "./images/35_chipotle_goods.png",
 };
 
 export default function Results({ closeResults, markerMap, selectedMarker }) {

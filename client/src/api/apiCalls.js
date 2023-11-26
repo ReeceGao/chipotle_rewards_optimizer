@@ -125,9 +125,10 @@ function optimizeRewards(rewards, listOfRestaurantPrices, restaurants) {
 
                 //Edge case as double protein was located in a weird spot
                 if (title === "Double Protein") {
-                    filteredItemByType = restaurantPrice[
-                        category
-                    ][0].contents.filter((option) => {
+                    let temp = restaurantPrice[category].filter((entrees) => {
+                        return entrees.itemName === "Chicken Bowl";
+                    });
+                    filteredItemByType = temp[0].contents.filter((option) => {
                         return itemType.includes(option.itemType);
                     });
                 } else {
